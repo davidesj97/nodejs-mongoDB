@@ -6,7 +6,13 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   // res.send("Hola desde get")
-  response.success(req, res, "Lista de mensajes")
+  controller.getMessages()
+    .then(resolve => {
+      response.success(req, res, resolve);
+    })
+    .catch(e => {
+      response.error(req, res, "Unexpected error", 500, e);
+    })
 })
 
 router.post('/', (req,res) => {
