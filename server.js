@@ -1,8 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-// const router = require('./components/message/network');
+const db = require('./db');
+
 const router = require('./network/routes');
+
+db();
 
 var app = express();
 
