@@ -5,8 +5,8 @@ const router = express.Router();
 
 
 router.get('/', (req, res) => {
-  // res.send("Hola desde get")
-  controller.getMessages()
+  const filterMessages = req.query.user || null;
+  controller.getMessages(filterMessages)
     .then(resolve => {
       response.success(req, res, resolve);
     })

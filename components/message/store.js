@@ -16,14 +16,16 @@ db.connect(uri, {
   })
 
 function addMessage(message){
-  // list.push(message);
   const myMessage = new Model(message);
   myMessage.save();
 }
 
-async function getMessage() {
-  // return list;
-  const messages = await Model.find();
+async function getMessage(filterUser) {
+  let filter = {}
+  if (filterUser !== null) {
+    filter = { "user": new RegExp(filterUser, "i")  }
+  }
+  const messages = await Model.find(filter);
   return messages;
 
 }
