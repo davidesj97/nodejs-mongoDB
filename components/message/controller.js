@@ -5,7 +5,6 @@ function addMessage (user, message) {
     if (!user || !message) {
       console.error("[messageController] No hay usuario o mensaje")
       reject("Los datos son incorrectos")
-      return false;
     }
     const fullMessage = {
       user,
@@ -24,7 +23,20 @@ function getMessages () {
   });
 }
 
+function updateMessage (id, message) {
+  return new Promise(async (resolve, reject) => {
+    if (!id || !message) {
+      console.error("[messageController] No hay id o mensaje")
+      reject("Los datos son incorrectos")
+    }
+
+    const result = await store.updateMessage(id, message);
+    resolve(result);
+  });
+}
+
 module.exports = {
   addMessage,
   getMessages,
+  updateMessage
 };
