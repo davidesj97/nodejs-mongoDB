@@ -35,8 +35,29 @@ function updateMessage (id, message) {
   });
 }
 
+function deleteMessage (id) {
+  return new Promise(async (resolve, reject) => {
+    if (!id) {
+      console.log("[messageController] No hay id")
+      reject("Los datos son incorrectos")
+    }
+
+    store.deleteMessaga(id)
+      .then((data)=> {
+        if (!data) {
+          resolve("Message not found")
+        }
+        resolve(`Mensaje ${id} eliminado correctamente`);
+      })
+      .catch(e => {
+        reject(e)
+      })
+  })
+}
+
 module.exports = {
   addMessage,
   getMessages,
-  updateMessage
+  updateMessage,
+  deleteMessage,
 };

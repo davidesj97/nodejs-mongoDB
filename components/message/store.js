@@ -38,8 +38,23 @@ async function updateMessage (id, message) {
   return newMessage;
 }
 
+async function _existDB (id) {
+  const exist = await Model.exists({
+      _id: id
+  });
+  return exist;
+}
+
+async function deleteMessaga (id) {
+  if (await _existDB(id)){
+    return Model.findByIdAndDelete(id);
+  }
+  return false
+}
+
 module.exports = {
   add: addMessage,
   list: getMessage,
-  updateMessage
+  updateMessage,
+  deleteMessaga
 }
